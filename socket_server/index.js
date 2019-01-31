@@ -15,6 +15,73 @@ server.listen(3000, (err) => {
 });
 
 const players = { 1: null, 2: null };
+const choices = { 1: null, 2: null };
+
+const findWinner = (obj1, obj2) => {
+  const champ = {
+    winner: null,
+    loser: null,
+    isTie: false,
+    winnerChoice: '',
+    loserChoice: '',
+  };
+
+  if (obj1.selection === 'rock') {
+    if (obj2.selection === 'rock') {
+      champ.isTie = true;
+      champ.winnerChoice = 'rock';
+      champ.loserChoice = 'rock';
+    } else if (obj2.selection === 'paper') {
+      champ.winner = obj2.playerNumber;
+      champ.loser = obj1.playerNumber;
+      champ.winnerChoice = 'paper';
+      champ.loserChoice = 'rock';
+    } else if (obj2.selection === 'scissors') {
+      // scissors
+      champ.winner = obj1.playerNumber;
+      champ.loser = obj2.playerNumber;
+      champ.winnerChoice = 'rock';
+      champ.loserChoice = 'scissors';
+    }
+  }
+  if (obj1.selection === 'paper') {
+    if (obj2.selection === 'rock') {
+      champ.winner = obj1.playerNumber;
+      champ.loser = obj2.playerNumber;
+      champ.winnerChoice = 'paper';
+      champ.loserChoice = 'rock';
+    } else if (obj2.selection === 'paper') {
+      champ.isTie = true;
+      champ.winnerChoice = 'paper';
+      champ.loserChoice = 'paper';
+    } else if (obj2.selection === 'scissors') {
+      // scissors
+      champ.winner = obj2.playerNumber;
+      champ.loser = obj1.playerNumber;
+      champ.winnerChoice = 'scissors';
+      champ.loserChoice = 'paper';
+    }
+  }
+  if (obj1.selection === 'scissors') {
+    if (obj2.selection === 'rock') {
+      champ.winner = obj2.playerNumber;
+      champ.loser = obj1.playerNumber;
+      champ.winnerChoice = 'rock';
+      champ.loserChoice = 'scissors';
+    } else if (obj2.selection === 'paper') {
+      champ.winner = obj1.playerNumber;
+      champ.loser = obj2.playerNumber;
+      champ.winnerChoice = 'scissors';
+      champ.loserChoice = 'paper';
+    } else if (obj2.selection === 'scissors') {
+      // scissors
+      champ.isTie = true;
+      champ.winnerChoice = 'scissors';
+      champ.loserChoice = 'scissors';
+    }
+  }
+  return champ;
+};
 
 io.sockets.on('connection', function (socket) {
   console.log('A new user connected!');
@@ -35,6 +102,10 @@ io.sockets.on('connection', function (socket) {
     playerNumber,
   });
 
+  if (players[1] && players[2]) {
+    io.emit('bothPlayersReady', { message: 'Both players are connected!'});
+  }
+
   socket.on('disconnect', () => {
     console.log('a player disconnected!');
     const disconnector = socket.client.id;
@@ -47,7 +118,16 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('clicked', (data) => {
     console.log('from client -->', data);
-    socket.emit('selection', { test: 'this somehow works' });
+    choices[data.playerNumber] = {...data};
+    let result = null;
+    if (choices[1] && choices[2]) {
+      result = findWinner(choices[1], choices[2]);
+      choices[1] = null;
+      choices[2] = null;
+    }
+    if (result) {
+      io.emit('selection', result);
+    }
   });
 });
 
