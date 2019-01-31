@@ -22,15 +22,15 @@ socket.on('playerHasConnected', function (data) {
 const button = document.getElementById('selection');
 
 const sendSelection = () => {
-  socket.emit('clicked', {
+  socket.emit('selection', {
     socketId,
     playerNumber: state, 
     selection: selectionMap[state], 
   });
 }
 
-socket.on('selection', (data) => {
-  console.log('from socket, on selection event -->', data);
+socket.on('winner', (data) => {
+  console.log('from socket, on winner event -->', data);
 });
 
 socket.on('bothPlayersReady', (data) => {
