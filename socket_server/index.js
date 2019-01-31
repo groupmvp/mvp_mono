@@ -14,16 +14,42 @@ server.listen(3000, (err) => {
   }
 });
 
-let playerCount = 0;
+const players = { 1: null, 2: null };
 
 io.sockets.on('connection', function (socket) {
   console.log('A new user connected!');
-  playerCount += 1;
-  socket.emit('info', { msg: `Welcome to RPS Player ${playerCount}` });
+  if (!players[1]) {
+    players[1] = socket.client.id;
+  } else {
+    players[2] = socket.client.id;
+  }
+  let playerNumber = 0;
+  for (let key in players) {
+    if (players[key] === socket.client.id) {
+      playerNumber = key;
+    }
+  }
+  socket.emit('playerHasConnected', { 
+    msg: `Welcome to RPS Player ${playerNumber}`,
+    socketId: socket.client.id,
+    playerNumber,
+  });
 
   socket.on('disconnect', () => {
-    console.log('player has disconnected');
-    playerCount -= 1;
+    console.log('a player disconnected!');
+    const disconnector = socket.client.id;
+    for (let key in players ) {
+      if (players[key] === disconnector) {
+        players[key] = null;
+      }
+    }
+  });
+
+  socket.on('clicked', (data) => {
+    console.log('from client -->', data);
+    socket.emit('selection', { test: 'this somehow works' });
+    // we need to know when both players have made a seleciton
+    // some how so that the game can end and we can show winner.
   });
 });
 
