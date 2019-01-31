@@ -116,7 +116,7 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
-  socket.on('clicked', (data) => {
+  socket.on('selection', (data) => {
     console.log('from client -->', data);
     choices[data.playerNumber] = {...data};
     let result = null;
@@ -126,7 +126,7 @@ io.sockets.on('connection', function (socket) {
       choices[2] = null;
     }
     if (result) {
-      io.emit('selection', result);
+      io.emit('winner', result);
     }
   });
 });
