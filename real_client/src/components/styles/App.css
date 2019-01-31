@@ -1,0 +1,45 @@
+.container{
+    display: flex;
+
+}
+
+.playerOne {
+    display: flex;
+    justify-content: flex-start;
+    font-family: "Avenir Next";
+    flex-direction: column;
+    width: 25%
+}
+
+.playerTwo {
+    display: flex;
+    justify-content: flex-end;
+    font-family: "Avenir Next";
+    flex-direction: column;
+    width: 25%
+
+}
+
+.spaceContainer {
+    display: flex;
+    justify-content: center;
+    font-family: "Avenir Next";
+    flex-direction: column;
+    width: 50%
+}
+
+.timer{
+
+}
+
+.button { 
+    width: 9%; 
+    background: rgb(54, 110, 230); 
+    border: none; 
+    padding: 10px; 
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Avenir Next";
+}
+
+
