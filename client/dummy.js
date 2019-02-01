@@ -31,9 +31,14 @@ const sendSelection = () => {
 
 socket.on('winner', (data) => {
   console.log('from socket, on winner event -->', data);
+
+  // send back a new game request
+  socket.emit('newGame', { socketId });
+
 });
 
 socket.on('bothPlayersReady', (data) => {
   console.log('ready -->', data);
 });
+
 
