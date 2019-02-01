@@ -34,10 +34,15 @@ io.sockets.on('connection', function (socket) {
   // add new player to queue
   queue = addToQueue(queue, socket.client.id);
 
+  
+
   // logic for assigning players to 1 and 2
   // console.log('current queue after player added -->', queue);
  
   checkAndUpdateQueuePlayers(queue, players);
+
+  // updated queue so send it to client
+  io.emit('queue', { queue });
 
   // console.log('queue after player is assigned -->', queue);
   // console.log('players after a player is assigned -->', players);
@@ -72,6 +77,10 @@ io.sockets.on('connection', function (socket) {
     // console.log('queue after disconnect -->', queue);
     // console.log('players after disconnect -->', players);
     checkAndUpdateQueuePlayers(queue, players);
+
+    // updated queue so send it to client
+    io.emit('queue', { queue });
+
     // console.log('queue after disconnect and update -->', queue);
     // console.log('players after disconnect and update -->', players);
 
@@ -96,9 +105,14 @@ io.sockets.on('connection', function (socket) {
       checkAndUpdateQueuePlayers(queue, players);
       
       queue = addToQueue(queue, loser);
+
+      
       // console.log('loser added to the queue -->', queue);
       console.log('updated queue and players -->', queue, players);
       checkAndUpdateQueuePlayers(queue, players);
+
+      // updated queue so send it to client
+      io.emit('queue', { queue });
     }
   });
 
@@ -115,29 +129,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-module.exports = io;
+// module.exports = io;
 
-
-
-
-
-
-  // if (queue.length && !players[1]) {
-  //   players[1] = queue.shift();
-  // }
-  // if (queue.length && !players[2]) {
-  //   players[2] = queue.shift();
-  //   console.log('queue after player 2 is assigned -->', queue);
-  // }
-  // if (!players[1]) {
-  //   players[1] = socket.client.id;
-  // } else {
-  //   players[2] = socket.client.id;
-  // }
-
-  // let playerNumber = 0;
-  // for (let key in players) {
-  //   if (players[key] === socket.client.id) {
-  //     playerNumber = key;
-  //   }
-  // }
