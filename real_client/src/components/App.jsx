@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import socketIOClient from "socket.io-client";
 import style from "./styles/App.css";
 import Clock from "./Clock.jsx";
+import WaitingList from './WaitingList.jsx';
+import stylesWait from './styles/WaitingList.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -17,7 +19,8 @@ class App extends React.Component {
         ready: false,
         alert: false,
         timer: 30,
-        winner: null
+        winner: null,
+        queue: ['jeremy', 'beremy', 'kevin'],
       };
       this.rock = this.rock.bind(this);
       this.paper = this.paper.bind(this);
@@ -92,6 +95,7 @@ class App extends React.Component {
 
     render() {
         return(
+          <div>
             <div className={style.container}>
               <div className={style.playerOne}>
                 {/* {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''} */}
@@ -122,10 +126,12 @@ class App extends React.Component {
                   </div>
                 </div>
               </div>
-
-
-            </div>
-            
+              </div>
+              <div className={stylesWait.container}>
+                  <div className={stylesWait.title}>Waiting List</div>
+                  <WaitingList queue={this.state.queue}/>
+              </div>
+          </div>
         )
     }
 }
