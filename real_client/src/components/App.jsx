@@ -94,31 +94,27 @@ class App extends React.Component {
         return(
             <div className={style.container}>
               <div className={style.playerOne}>
-                {/* {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''} */}
+                {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''}
                 <div className={style.playerOneText}>PLAYER ONE<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img>
                   <div className = {style.buttonBox}>
-
-                    <button className ={style.button} onClick={this.rock} >rock</button>
-                    <button className ={style.button} onClick={this.paper}>paper</button>
-                    <button className ={style.button} onClick={this.scissors}>scissors</button>
+                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
                   </div>
                 </div>
               </div>
-              <div className={style.spaceContainer}>
-                {this.state.winner ? (this.state.winner.winnerChoice + ' beats ' + this.state.winner.loserChoice + '!') : ''} 
-                <br/>
-                {this.state.winner ? ('Player ' + this.state.winner.winner + ' wins!') : ''}
-                <Clock />
+              <div>
+                <Clock ready={this.state.ready} winner={this.state.winner}/>
               </div>
               <div className={style.playerTwo}>
-                {/* {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''}  */}
+                {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''} 
                 <div className={style.playerTwoText}>PLAYER TWO<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_RPSLS.gif"></img>
                   <div className = {style.buttonBox}>
-                    <button className ={style.button} onClick={this.rock} >rock</button>
-                    <button className ={style.button} onClick={this.paper}>paper</button>
-                    <button className ={style.button} onClick={this.scissors}>scissors</button>
+                  {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
                   </div>
                 </div>
               </div>

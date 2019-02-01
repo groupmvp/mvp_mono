@@ -7,7 +7,7 @@ class Clock extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          time: 30
+          time: 15
       };
     }
   
@@ -23,9 +23,11 @@ class Clock extends React.Component {
     }
   
     tick() {
-      this.setState({
-        time: this.state.time-1
-      });
+      if (this.state.time > 0) {
+        this.setState({
+          time: this.state.time-1
+        });
+      }
     }
   
     render() {
@@ -33,7 +35,16 @@ class Clock extends React.Component {
         <div className = {style.clock}>
 
           <h2>{this.state.time}</h2>
+
+
+          <div className={style.spaceContainer}>
+                {this.state.winner ? (this.state.winner.winnerChoice + ' beats ' + this.state.winner.loserChoice + '!') : ''} 
+                <br/>
+                {this.state.winner ? ('Player ' + this.state.winner.winner + ' wins!') : ''}
+              </div>
         </div>
+
+        
       );
     }
   }
