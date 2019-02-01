@@ -1,7 +1,21 @@
 .clock {
     display: flex;
     justify-content: center;
-    color: green;
-    font-size: 30px;
-       
+    align-items: top;
+    color: red;
+    font-size: 60px;
+    text-shadow: 4px 4px 4px orange, 10px 10px 10px red;
+    /* text-shadow: 2px 2px 10px red; */
+    flex-direction: row;
+    align-self: center;
+    height: 100%;
+    width: 100%;
+}
+
+.spaceContainer {
+    display: flex;
+    justify-content: center;
+    font-family: "Avenir Next";
+    flex-direction: column;
+    width: 50%
 }
