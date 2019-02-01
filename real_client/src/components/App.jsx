@@ -96,7 +96,7 @@ class App extends React.Component {
               <div className={style.playerOne}>
                 {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''}
                 <div className={style.playerOneText}>PLAYER ONE<br/>
-                  <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img>
+                  <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
                   <div className = {style.buttonBox}>
                     {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
