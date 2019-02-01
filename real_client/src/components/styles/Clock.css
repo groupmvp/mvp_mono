@@ -1,0 +1,7 @@
+.clock {
+    display: flex;
+    justify-content: center;
+    color: green;
+    font-size: 30px;
+       
+}
