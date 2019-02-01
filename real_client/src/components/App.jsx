@@ -104,8 +104,8 @@ class App extends React.Component {
                   </div>
                 </div>
               </div>
-              <div>
-                <Clock ready={this.state.ready} winner={this.state.winner}/>
+              <div className={style.spaceContainer}>
+                {/* <Clock ready={this.state.ready} winner={this.state.winner}/> */}
               </div>
               <div className={style.playerTwo}>
                 {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''} 
