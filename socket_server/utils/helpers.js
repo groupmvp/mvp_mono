@@ -80,4 +80,43 @@ module.exports = {
     }
     return;
   },
+  getPlayerNumber: (socketId, currentPlayers) => {
+    for (let key in currentPlayers) {
+      if (currentPlayers[key] === socketId) {
+        return key;
+      }
+    }
+    return 0;
+  },
+  removeDisconnector: (q, currentPlayers, socketId) => {
+    for (let key in currentPlayers ) {
+      if (currentPlayers[key] === socketId) {
+        currentPlayers[key] = null;
+      }
+    }
+    
+    let index = q.indexOf(socketId);
+    // console.log('should be -1 if not in queue -->', index);
+    if (index >= 0) {
+      q.splice(index, 1);
+    }
+    return;
+  },
+  handleRageQuit: (loserId, currentPlayers, io) => {
+    let winner;
+    for (let key in currentPlayers ) {
+      if (currentPlayers[key] !== loserId) {
+        winner = key;
+      }
+      if (currentPlayers[key] === loserId) {
+        io.emit('winner', {
+          winner,
+          loser: key,
+          isTie: false,
+          winnerChoice: null,
+          loserChoice: null,
+        });
+      }
+    }
+  },
 };

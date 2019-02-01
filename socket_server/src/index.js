@@ -2,7 +2,14 @@ var http = require('http')
   , path = require('path')
   , socketIO = require('socket.io');
 
-const { findWinner, addToQueue, checkAndUpdateQueuePlayers } = require('../utils/helpers');
+const { 
+  findWinner, 
+  addToQueue, 
+  checkAndUpdateQueuePlayers, 
+  getPlayerNumber,
+  removeDisconnector,
+  handleRageQuit,
+} = require('../utils/helpers');
 
 const server = http.createServer();
 
@@ -28,21 +35,18 @@ io.sockets.on('connection', function (socket) {
   queue = addToQueue(queue, socket.client.id);
 
   // logic for assigning players to 1 and 2
-  console.log('current queue after player added -->', queue);
+  // console.log('current queue after player added -->', queue);
  
   checkAndUpdateQueuePlayers(queue, players);
 
-  console.log('queue after player is assigned -->', queue);
-  console.log('players after a plyer is assigned -->', players);
+  // console.log('queue after player is assigned -->', queue);
+  // console.log('players after a player is assigned -->', players);
 
 
-  // give this user the correct player number
-  let playerNumber = 0;
-  for (let key in players) {
-    if (players[key] === socket.client.id) {
-      playerNumber = key;
-    }
-  }
+  // // give this user the correct player number
+
+  let playerNumber = getPlayerNumber(socket.client.id, players);
+
 
   // telling the client which player she is
   // by passing playerNumber to the message object going to the client
@@ -58,16 +62,23 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', () => {
     console.log('a player disconnected!');
+
     const disconnector = socket.client.id;
-    for (let key in players ) {
-      if (players[key] === disconnector) {
-        players[key] = null;
-      }
-    }
+    // console.log('this should be gone from Q and Players -->', disconnector);
+
+    handleRageQuit(disconnector, players, io);
+    
+    removeDisconnector(queue, players, disconnector);
+    // console.log('queue after disconnect -->', queue);
+    // console.log('players after disconnect -->', players);
+    checkAndUpdateQueuePlayers(queue, players);
+    // console.log('queue after disconnect and update -->', queue);
+    // console.log('players after disconnect and update -->', players);
+
   });
 
   socket.on('selection', (data) => {
-    console.log('from client -->', data);
+    // console.log('from client -->', data);
     choices[data.playerNumber] = {...data};
     let result = null;
     if (choices[1] && choices[2]) {
@@ -77,16 +88,29 @@ io.sockets.on('connection', function (socket) {
     }
     if (result) {
       io.emit('winner', result);
-      console.log('notice me! notice me!');
+      // console.log('notice me! notice me!');
       let loser = players[result.loser];
-      console.log('loser -->', loser);
+      // console.log('loser -->', loser);
       players[result.loser] = null;
-      console.log('reassign pleyers -->', players);
+      // console.log('reassign pleyers -->', players);
       checkAndUpdateQueuePlayers(queue, players);
-      console.log('updated queue and players -->', queue, players);
+      
       queue = addToQueue(queue, loser);
-      console.log('loser added to the queue -->', queue);
+      // console.log('loser added to the queue -->', queue);
+      console.log('updated queue and players -->', queue, players);
+      checkAndUpdateQueuePlayers(queue, players);
     }
+  });
+
+  // listen for new game request
+  socket.on('newGame', (data) => {
+    console.log('this player has requested new game info -->', data);
+    let newPlayerNumber = getPlayerNumber(data.socketId, players);
+    socket.emit('playerHasConnected', { 
+      msg: `Welcome to RPS Player ${newPlayerNumber}`,
+      socketId: data.socketId,
+      playerNumber: newPlayerNumber,
+    });
   });
 });
 
@@ -109,4 +133,11 @@ module.exports = io;
   //   players[1] = socket.client.id;
   // } else {
   //   players[2] = socket.client.id;
+  // }
+
+  // let playerNumber = 0;
+  // for (let key in players) {
+  //   if (players[key] === socket.client.id) {
+  //     playerNumber = key;
+  //   }
   // }
