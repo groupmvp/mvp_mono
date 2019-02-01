@@ -49,6 +49,7 @@
     border-radius: 5px;
     font-family: "Avenir Next";
     font-size: 16px;
+    text-shadow: 4px 4px 4px orange, 10px 10px 10px red;
 }
 
 .buttonBox{
@@ -68,3 +69,10 @@
     font-size: 16px;
 }
 
+.spaceContainer {
+    display: flex;
+    justify-content: center;
+    font-family: "Avenir Next";
+    flex-direction: column;
+    width: 50%
+}

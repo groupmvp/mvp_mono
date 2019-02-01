@@ -12,10 +12,3 @@
     width: 100%;
 }
 
-.spaceContainer {
-    display: flex;
-    justify-content: center;
-    font-family: "Avenir Next";
-    flex-direction: column;
-    width: 50%
-}
