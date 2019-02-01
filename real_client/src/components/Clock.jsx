@@ -23,7 +23,7 @@ class Clock extends React.Component {
     }
   
     tick() {
-      if (this.state.time > 0) {
+      if (this.props.ready && this.state.time > 0) {
         this.setState({
           time: this.state.time-1
         });
@@ -32,16 +32,36 @@ class Clock extends React.Component {
   
     render() {
       return (
-        <div className = {style.clock}>
+        <div className = {style.container}>
+          <div className = {style.clock}> 
+            <h2>{this.state.time}</h2>
+          </div>
 
-          <h2>{this.state.time}</h2>
+          <div className = {style.text}> 
+                {this.props.winner 
+                  ?this.props.winner.isTie 
+                    ? (this.props.winner.winnerChoice + ' ties ' + this.props.winner.loserChoice + '!') 
+                    : (this.props.winner.winnerChoice + ' beats ' + this.props.winner.loserChoice + '!')
+                  : ""
+                }
 
-
-          <div className={style.spaceContainer}>
-                {this.state.winner ? (this.state.winner.winnerChoice + ' beats ' + this.state.winner.loserChoice + '!') : ''} 
                 <br/>
-                {this.state.winner ? ('Player ' + this.state.winner.winner + ' wins!') : ''}
-              </div>
+                {this.props.winner 
+                  ?this.props.winner.isTie 
+                    ?("Its a tie! New Game?")
+                    :('Player ' + this.props.winner.winner + ' wins!')
+                  : ""
+                }
+                <br/>
+                {/* {this.props.winner 
+                  ?this.props.winner.isTie 
+                    ? <button className = {style.button}> New Game </button>
+                    :('Player ' + this.props.winner.winner + ' wins!')
+                  : ""
+                } */}
+
+          </div>
+
         </div>
 
         
