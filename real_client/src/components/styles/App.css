@@ -8,16 +8,35 @@
     justify-content: flex-start;
     font-family: "Avenir Next";
     flex-direction: column;
-    width: 25%
+    width: 25%;
+    align-content: flex-start;
+}
+.playerOneText {
+  border: 2px solid red;
+  height:50%
+}
+.playerOneText img{
+  width: 100%;
+  height: 100%;
 }
 
 .playerTwo {
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     font-family: "Avenir Next";
     flex-direction: column;
-    width: 25%
+    width: 25%;
+    align-content: flex-start;
 
+
+}
+.playerTwoText {
+  border: 2px solid blue ;
+  height: 50%
+}
+.playerTwoText img {
+  width: 100%;
+  height: 100%;
 }
 
 .spaceContainer {
@@ -28,18 +47,22 @@
     width: 50%
 }
 
-.timer{
-
-}
 
 .button { 
-    width: 9%; 
+    width: 30%; 
     background: rgb(54, 110, 230); 
     border: none; 
+    justify-content: space-between;
     padding: 10px; 
     cursor: pointer;
     border-radius: 5px;
     font-family: "Avenir Next";
+    font-size: 16px;
+}
+
+.buttonBox{
+    display: flex;
+    justify-content: space-between
 }
 
 
