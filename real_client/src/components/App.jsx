@@ -143,15 +143,11 @@ class App extends React.Component {
                 <div className={style.playerOneText}>PLAYER ONE<br/>
                   <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
                   <div className = {style.buttonBox}>
-
-                    <button className ={style.button} onClick={this.rock} >rock</button>
-                    <button className ={style.button} onClick={this.paper}>paper</button>
-                    <button className ={style.button} onClick={this.scissors}>scissors</button>
-                    <button className ={style.button} onClick={this.lizard}>lizard</button>
-                    <button className ={style.button} onClick={this.spock}>spock</button>
                     {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
                     {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
+                    {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.lizard} >lizard</button> : <button className ={style.buttonDisabled} disabled>lizard</button>}
+                    {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.spock} >spock</button> : <button className ={style.buttonDisabled} disabled>spock</button>}
                   </div>
                 </div>
               </div>
@@ -171,14 +167,12 @@ class App extends React.Component {
                 <div className={style.playerTwoText}>PLAYER TWO<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_RPSLS.gif"></img>
                   <div className = {style.buttonBox}>
-                    <button className ={style.button} onClick={this.rock} >rock</button>
-                    <button className ={style.button} onClick={this.paper}>paper</button>
-                    <button className ={style.button} onClick={this.scissors}>scissors</button>
-                    <button className ={style.button} onClick={this.lizard}>lizard</button>
-                    <button className ={style.button} onClick={this.spock}>spock</button>
                   {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
                     {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
+                    {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.lizard} >lizard</button> : <button className ={style.buttonDisabled} disabled>lizard</button>}
+                    {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.spock} >spock</button> : <button className ={style.buttonDisabled} disabled>spock</button>}
+
                   </div>
                 </div>
               </div>
