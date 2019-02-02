@@ -5,6 +5,7 @@ import style from "./styles/App.css";
 import Clock from "./Clock.jsx";
 import WaitingList from './WaitingList.jsx';
 import stylesWait from './styles/WaitingList.css';
+import Chat from './styles/Chat.css'
 
 class App extends React.Component {
     constructor(props) {
@@ -181,6 +182,11 @@ class App extends React.Component {
                   <div className={stylesWait.title}>Waiting List</div>
                   <WaitingList queue={this.state.queue}/>
               </div>
+
+              {/* <div>
+                <Chat />
+              </div> */}
+
           </div>
         )
     }
