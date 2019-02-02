@@ -46,7 +46,6 @@ class App extends React.Component {
           this.setState({alert: temp});
           this.winner();
           this.bothPlayersReady();
-          this.changeColor = this.changeColor.bind(this);
         })       
           
         // this.socket.on("bothPlayersReady", (data) => {
