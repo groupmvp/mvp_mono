@@ -8,6 +8,7 @@ const selectionMap = {
 
 let state = 0;
 let socketId = '';
+let queue = [];
 // if we get an "info" emit from the socket server then console.log the data we receive
 const game = document.getElementById('game');
 socket.on('playerHasConnected', function (data) {
@@ -31,9 +32,19 @@ const sendSelection = () => {
 
 socket.on('winner', (data) => {
   console.log('from socket, on winner event -->', data);
+
+  // send back a new game request
+  socket.emit('newGame', { socketId });
+
 });
 
 socket.on('bothPlayersReady', (data) => {
   console.log('ready -->', data);
 });
+
+socket.on('queue', (data) => {
+  queue = data.queue;
+  console.log('this is the updated queue -->', queue);
+});
+
 
