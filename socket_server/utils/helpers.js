@@ -26,6 +26,17 @@ module.exports = {
         champ.loser = obj2.playerNumber;
         champ.winnerChoice = 'rock';
         champ.loserChoice = 'scissors';
+      } else if (obj2.selection === 'lizard') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'rock';
+        champ.loserChoice = 'lizard';
+      }
+      else if (obj2.selection === 'spock') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'spock';
+        champ.loserChoice = 'rock';
       }
     }
     if (obj1.selection === 'paper') {
@@ -44,6 +55,16 @@ module.exports = {
         champ.loser = obj1.playerNumber;
         champ.winnerChoice = 'scissors';
         champ.loserChoice = 'paper';
+      } else if (obj2.selection === 'lizard') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'lizard';
+        champ.loserChoice = 'paper';
+      } else if (obj2.selection === 'spock') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'paper';
+        champ.loserChoice = 'spock';
       }
     }
     if (obj1.selection === 'scissors') {
@@ -62,8 +83,75 @@ module.exports = {
         champ.isTie = true;
         champ.winnerChoice = 'scissors';
         champ.loserChoice = 'scissors';
+      } else if (obj2.selection === 'lizard') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'scissors';
+        champ.loserChoice = 'lizard';
+      } else if (obj2.selection === 'spock') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'spock';
+        champ.loserChoice = 'scissors';
       }
     }
+    // lizard
+    if (obj1.selection === 'lizard') {
+      if (obj2.selection === 'rock') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'rock';
+        champ.loserChoice = 'lizard';
+      } else if (obj2.selection === 'paper') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'lizard';
+        champ.loserChoice = 'paper';
+      } else if (obj2.selection === 'lizard') {
+        champ.isTie = true;
+        champ.winnerChoice = 'lizard';
+        champ.loserChoice = 'lizard';
+      } else if (obj2.selection === 'scissors') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'scissors';
+        champ.loserChoice = 'lizard';
+      } else if (obj2.selection === 'spock') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'lizard';
+        champ.loserChoice = 'spock';
+      }
+    }
+    // spock
+    if (obj1.selection === 'spock') {
+      if (obj2.selection === 'rock') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'spock';
+        champ.loserChoice = 'rock';
+      } else if (obj2.selection === 'paper') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'paper';
+        champ.loserChoice = 'spock';
+      } else if (obj2.selection === 'spock') {
+        champ.isTie = true;
+        champ.winnerChoice = 'spock';
+        champ.loserChoice = 'spock';
+      } else if (obj2.selection === 'lizard') {
+        champ.winner = obj2.playerNumber;
+        champ.loser = obj1.playerNumber;
+        champ.winnerChoice = 'lizard';
+        champ.loserChoice = 'spock';
+      } else if (obj2.selection === 'scissors') {
+        champ.winner = obj1.playerNumber;
+        champ.loser = obj2.playerNumber;
+        champ.winnerChoice = 'spock';
+        champ.loserChoice = 'scissors';
+      }
+    }
+
     return champ;
   },
   addToQueue: (q, newPlayer) => {
