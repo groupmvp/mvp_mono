@@ -8,7 +8,7 @@ class Clock extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        time: 15,
+        time: 20,
         newGameSent: false,
         timeDelay: false,
         nullSent: false
@@ -46,12 +46,10 @@ class Clock extends React.Component {
     }
 
     newGame() {
-      // setTimeout(() => {
         this.props.socket.emit('newGame', {
         socketId: this.props.socketId
       })
-      //after this point this.ready = true
-      // )}, 3000); 
+
 
         
       let temp = true;
@@ -75,6 +73,10 @@ class Clock extends React.Component {
       }, 4000)
     }
 
+    finalDelay() {
+      setTimeout(() => {}, 2000)
+    }
+
     render() {
       return (
         <div className = {style.container}>
@@ -95,16 +97,12 @@ class Clock extends React.Component {
                 <br/>
                 {this.props.winner 
                   ?this.props.winner.isTie 
-                    ?("Its a tie!")
-                    :('Player ' + this.props.winner.winner + ' wins!')
+                    ?(this.finalDelay(), ("Its a tie!"))
+                    :(this.finalDelay(), ('Player ' + this.props.winner.winner + ' wins!'))
                   : ""
                 }
-
           </div>
-
         </div>
-
-        
       );
     }
   }
