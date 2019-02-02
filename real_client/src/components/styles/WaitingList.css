@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: solid 1px black;
+  height: auto;
+  width: 15%;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: solid 1px black;
+  background-color: #5016ad;
+  height: auto;
+  width: auto;
+  color: white;
+  font-size: 14px;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 5px;
+}

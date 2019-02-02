@@ -151,6 +151,22 @@ module.exports = {
         champ.loserChoice = 'scissors';
       }
     }
+    if (!obj1.selection && !obj2.selection) {
+      champ.winner = null;
+      champ.loser = null;
+      champ.winnerChoice = null;
+      champ.loserChoice = null;
+    } else if (obj1.selection && !obj2.selection) {
+      champ.winner = obj1.playerNumber;
+      champ.loser = obj2.playerNumber;
+      champ.winnerChoice = obj1.selection;
+      champ.loserChoice = null;
+    } else if (!obj1.selection && obj2.selection) {
+      champ.winner = obj2.playerNumber;
+      champ.loser = obj1.playerNumber;
+      champ.winnerChoice = obj2.selection;
+      champ.loserChoice = null;
+    }
 
     return champ;
   },

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import socketIOClient from "socket.io-client";
 import style from "./styles/App.css";
 import Clock from "./Clock.jsx";
+import WaitingList from './WaitingList.jsx';
+import stylesWait from './styles/WaitingList.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -16,11 +18,15 @@ class App extends React.Component {
         msg: '',
         ready: false,
         alert: false,
-        winner: null
+        timer: 30,
+        winner: null,
+        queue: ['jeremy', 'beremy', 'kevin'],
       };
       this.rock = this.rock.bind(this);
       this.paper = this.paper.bind(this);
       this.scissors = this.scissors.bind(this);
+      this.lizard = this.lizard.bind(this);
+      this.spock = this.spock.bind(this);
       this.winner = this.winner.bind(this);
       this.bothPlayersReady = this.bothPlayersReady.bind(this)
       this.gameReset = this.gameReset.bind(this);
@@ -75,6 +81,26 @@ class App extends React.Component {
       this.setState({selection: temp});
     }
 
+    lizard(){
+      let temp = 'lizard';
+      this.socket.emit('selection', {
+        socketId: this.state.socketId,
+        playerNumber: this.state.playerNumber, 
+        selection: temp, 
+      }); 
+      this.setState({selection: temp});
+    }
+
+    spock(){
+      let temp = 'spock';
+      this.socket.emit('selection', {
+        socketId: this.state.socketId,
+        playerNumber: this.state.playerNumber, 
+        selection: temp, 
+      }); 
+      this.setState({selection: temp});
+    }
+
     winner() {
       this.socket.on('winner', (data) => {
         console.log(data, 'WINNNNNEEERRRRRR');
@@ -110,15 +136,19 @@ class App extends React.Component {
 
     render() {
         return(
+          <div>
             <div className={style.container}>
               <div className={style.playerOne}>
                 {/* {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''} */}
                 <div className={style.playerOneText}>PLAYER ONE<br/>
                   <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
                   <div className = {style.buttonBox}>
-                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
-                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
-                    {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
+
+                    <button className ={style.button} onClick={this.rock} >rock</button>
+                    <button className ={style.button} onClick={this.paper}>paper</button>
+                    <button className ={style.button} onClick={this.scissors}>scissors</button>
+                    <button className ={style.button} onClick={this.lizard}>lizard</button>
+                    <button className ={style.button} onClick={this.spock}>spock</button>
                   </div>
                 </div>
               </div>
@@ -138,16 +168,23 @@ class App extends React.Component {
                 <div className={style.playerTwoText}>PLAYER TWO<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_RPSLS.gif"></img>
                   <div className = {style.buttonBox}>
+                    <button className ={style.button} onClick={this.rock} >rock</button>
+                    <button className ={style.button} onClick={this.paper}>paper</button>
+                    <button className ={style.button} onClick={this.scissors}>scissors</button>
+                    <button className ={style.button} onClick={this.lizard}>lizard</button>
+                    <button className ={style.button} onClick={this.spock}>spock</button>
                   {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
                     {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
                   </div>
                 </div>
               </div>
-
-
-            </div>
-            
+              </div>
+              <div className={stylesWait.container}>
+                  <div className={stylesWait.title}>Waiting List</div>
+                  <WaitingList queue={this.state.queue}/>
+              </div>
+          </div>
         )
     }
 }

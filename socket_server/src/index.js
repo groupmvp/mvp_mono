@@ -97,22 +97,45 @@ io.sockets.on('connection', function (socket) {
     }
     if (result) {
       io.emit('winner', result);
-      // console.log('notice me! notice me!');
-      let loser = players[result.loser];
-      // console.log('loser -->', loser);
-      players[result.loser] = null;
-      // console.log('reassign pleyers -->', players);
-      checkAndUpdateQueuePlayers(queue, players);
-      
-      queue = addToQueue(queue, loser);
 
-      
-      // console.log('loser added to the queue -->', queue);
-      console.log('updated queue and players -->', queue, players);
-      checkAndUpdateQueuePlayers(queue, players);
+      if (!result.winner && !result.loser && !isTie) {
+        
+        let loser1 = players[1];
+        let loser2 = players[2];
+        // console.log('loser -->', loser);
+        players[1] = null;
+        players[2] = null;
+        // console.log('reassign pleyers -->', players);
+        checkAndUpdateQueuePlayers(queue, players);
+        
+        queue = addToQueue(queue, loser1);
+        queue = addToQueue(queue, loser2);
+  
+        
+        // console.log('loser added to the queue -->', queue);
+        console.log('updated queue and players -->', queue, players);
+        checkAndUpdateQueuePlayers(queue, players);
+  
+        // updated queue so send it to client
+        io.emit('queue', { queue });
 
-      // updated queue so send it to client
-      io.emit('queue', { queue });
+      } else {
+        let loser = players[result.loser];
+        // console.log('loser -->', loser);
+        players[result.loser] = null;
+        // console.log('reassign pleyers -->', players);
+        checkAndUpdateQueuePlayers(queue, players);
+        
+        queue = addToQueue(queue, loser);
+  
+        
+        // console.log('loser added to the queue -->', queue);
+        console.log('updated queue and players -->', queue, players);
+        checkAndUpdateQueuePlayers(queue, players);
+  
+        // updated queue so send it to client
+        io.emit('queue', { queue });
+      }
     }
   });
 
