@@ -29,26 +29,28 @@ class App extends React.Component {
       this.spock = this.spock.bind(this);
       this.winner = this.winner.bind(this);
       this.bothPlayersReady = this.bothPlayersReady.bind(this)
+      this.gameReset = this.gameReset.bind(this);
       this.socket = socketIOClient(this.state.endpoint);
     }
     
     componentDidMount() {
         this.socket.on('playerHasConnected', (data) => {
-          // console.log(data, 'DAATTAAAA');    
+          console.log(data, 'playerHasConnected');    
           // console.log(temp, 'temp')
           this.setState({playerNumber: data.playerNumber,
                         socketId: data.socketId, 
                         msg: data.msg});
           let temp = true;
+          
           this.setState({alert: temp});
           this.winner();
           this.bothPlayersReady();
         })       
           
-        this.socket.on("bothPlayersReady", (data) => {
-          let temp = true;
-          this.setState({ready: temp});
-        })
+        // this.socket.on("bothPlayersReady", (data) => {
+        //   let temp = true;
+        //   this.setState({ready: temp});
+        // })
     }
 
     rock(){
@@ -110,9 +112,26 @@ class App extends React.Component {
     bothPlayersReady() {
       this.socket.on('bothPlayersReady', (data) => {
         console.log(data, 'Both Players Ready');
-        let temp = data;
+        let temp = true;
         this.setState({ready: temp});
+        
       })
+    }
+
+    gameReset() {
+      let temp = null;
+      let bool = false;
+      let str = '';
+      this.setState({
+        data: temp,
+        selection: temp, 
+        playerNumber: temp,
+        socketId: str,
+        msg: str,
+        alert: bool,
+        winner: temp
+      })
+
     }
 
     render() {
@@ -122,7 +141,7 @@ class App extends React.Component {
               <div className={style.playerOne}>
                 {/* {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''} */}
                 <div className={style.playerOneText}>PLAYER ONE<br/>
-                  <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img>
+                  <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
                   <div className = {style.buttonBox}>
 
                     <button className ={style.button} onClick={this.rock} >rock</button>
@@ -134,10 +153,15 @@ class App extends React.Component {
                 </div>
               </div>
               <div className={style.spaceContainer}>
-                {this.state.winner ? (this.state.winner.winnerChoice + ' beats ' + this.state.winner.loserChoice + '!') : ''} 
-                <br/>
-                {this.state.winner ? ('Player ' + this.state.winner.winner + ' wins!') : ''}
-                <Clock />
+                <Clock 
+                ready = {this.state.ready} 
+                winner = {this.state.winner}
+                socketId = {this.state.socketId}
+                socket = {this.socket}
+                gameReset = {this.gameReset}
+                selection = {this.state.selection}
+                playerNumber = {this.state.playerNumber}
+                />
               </div>
               <div className={style.playerTwo}>
                 {/* {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''}  */}
@@ -149,6 +173,9 @@ class App extends React.Component {
                     <button className ={style.button} onClick={this.scissors}>scissors</button>
                     <button className ={style.button} onClick={this.lizard}>lizard</button>
                     <button className ={style.button} onClick={this.spock}>spock</button>
+                  {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "2" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "2"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
                   </div>
                 </div>
               </div>

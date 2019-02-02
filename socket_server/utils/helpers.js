@@ -31,7 +31,8 @@ module.exports = {
         champ.loser = obj2.playerNumber;
         champ.winnerChoice = 'rock';
         champ.loserChoice = 'lizard';
-      } else if (obj2.selection === 'spock') {
+      }
+      else if (obj2.selection === 'spock') {
         champ.winner = obj2.playerNumber;
         champ.loser = obj1.playerNumber;
         champ.winnerChoice = 'spock';
