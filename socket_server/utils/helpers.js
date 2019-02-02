@@ -31,8 +31,7 @@ module.exports = {
         champ.loser = obj2.playerNumber;
         champ.winnerChoice = 'rock';
         champ.loserChoice = 'lizard';
-      }
-      else if (obj2.selection === 'spock') {
+      } else if (obj2.selection === 'spock') {
         champ.winner = obj2.playerNumber;
         champ.loser = obj1.playerNumber;
         champ.winnerChoice = 'spock';
@@ -150,6 +149,22 @@ module.exports = {
         champ.winnerChoice = 'spock';
         champ.loserChoice = 'scissors';
       }
+    }
+    if (!obj1.selection && !obj2.selection) {
+      champ.winner = null;
+      champ.loser = null;
+      champ.winnerChoice = null;
+      champ.loserChoice = null;
+    } else if (obj1.selection && !obj2.selection) {
+      champ.winner = obj1.playerNumber;
+      champ.loser = obj2.playerNumber;
+      champ.winnerChoice = obj1.selection;
+      champ.loserChoice = null;
+    } else if (!obj1.selection && obj2.selection) {
+      champ.winner = obj2.playerNumber;
+      champ.loser = obj1.playerNumber;
+      champ.winnerChoice = obj2.selection;
+      champ.loserChoice = null;
     }
 
     return champ;
