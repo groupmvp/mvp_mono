@@ -60,7 +60,7 @@ class Clock extends React.Component {
       this.props.gameReset()
 
       this.setState({
-        time: 15,
+        time: 20,
         newGameSent: false,
         timeDelay: false,
         nullSent: false
