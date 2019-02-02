@@ -10,8 +10,8 @@ app.use(parser.json());
 app.use(parser.urlencoded({
   extended: true,
 }));
-// app.use(express.static(path.join(__dirname, '../real_client/dist')));
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../real_client/dist')));
+// app.use(express.static(path.join(__dirname, '../client')));
 
 app.listen(port, (err) => {
   if (err) {

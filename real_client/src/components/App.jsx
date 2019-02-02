@@ -25,6 +25,8 @@ class App extends React.Component {
       this.rock = this.rock.bind(this);
       this.paper = this.paper.bind(this);
       this.scissors = this.scissors.bind(this);
+      this.lizard = this.lizard.bind(this);
+      this.spock = this.spock.bind(this);
       this.winner = this.winner.bind(this);
       this.bothPlayersReady = this.bothPlayersReady.bind(this)
       this.socket = socketIOClient(this.state.endpoint);
@@ -77,6 +79,26 @@ class App extends React.Component {
       this.setState({selection: temp});
     }
 
+    lizard(){
+      let temp = 'lizard';
+      this.socket.emit('selection', {
+        socketId: this.state.socketId,
+        playerNumber: this.state.playerNumber, 
+        selection: temp, 
+      }); 
+      this.setState({selection: temp});
+    }
+
+    spock(){
+      let temp = 'spock';
+      this.socket.emit('selection', {
+        socketId: this.state.socketId,
+        playerNumber: this.state.playerNumber, 
+        selection: temp, 
+      }); 
+      this.setState({selection: temp});
+    }
+
     winner() {
       this.socket.on('winner', (data) => {
         console.log(data, 'WINNNNNEEERRRRRR');
@@ -106,6 +128,8 @@ class App extends React.Component {
                     <button className ={style.button} onClick={this.rock} >rock</button>
                     <button className ={style.button} onClick={this.paper}>paper</button>
                     <button className ={style.button} onClick={this.scissors}>scissors</button>
+                    <button className ={style.button} onClick={this.lizard}>lizard</button>
+                    <button className ={style.button} onClick={this.spock}>spock</button>
                   </div>
                 </div>
               </div>
@@ -123,6 +147,8 @@ class App extends React.Component {
                     <button className ={style.button} onClick={this.rock} >rock</button>
                     <button className ={style.button} onClick={this.paper}>paper</button>
                     <button className ={style.button} onClick={this.scissors}>scissors</button>
+                    <button className ={style.button} onClick={this.lizard}>lizard</button>
+                    <button className ={style.button} onClick={this.spock}>spock</button>
                   </div>
                 </div>
               </div>
