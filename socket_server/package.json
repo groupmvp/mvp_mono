@@ -1,0 +1,28 @@
+{
+  "name": "mvp_mono",
+  "version": "1.0.0",
+  "description": "monolithic repo structure to implement socket rps game",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon socket_server/src/index.js",
+    "static-dev": "nodemon static_server/index.js",
+    "build": "webpack -d --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groupmvp/mvp_mono.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/groupmvp/mvp_mono/issues"
+  },
+  "homepage": "https://github.com/groupmvp/mvp_mono#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^2.2.0"
+  }
+}
