@@ -124,11 +124,13 @@ class App extends React.Component {
               </div>
               <div className={style.spaceContainer}>
                 <Clock 
-                ready={this.state.ready} 
-                winner={this.state.winner}
+                ready = {this.state.ready} 
+                winner = {this.state.winner}
                 socketId = {this.state.socketId}
                 socket = {this.socket}
                 gameReset = {this.gameReset}
+                selection = {this.state.selection}
+                playerNumber = {this.state.playerNumber}
                 />
               </div>
               <div className={style.playerTwo}>

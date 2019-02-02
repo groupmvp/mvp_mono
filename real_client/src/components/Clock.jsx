@@ -10,7 +10,8 @@ class Clock extends React.Component {
       this.state = {
         time: 15,
         newGameSent: false,
-        timeDelay: false
+        timeDelay: false,
+        nullSent: false
       };
     }
   
@@ -30,6 +31,17 @@ class Clock extends React.Component {
         this.setState({
           time: this.state.time-1
         });
+      }
+      if(this.state.time <= 0 && !this.props.selection && !this.state.nullSent ){
+        let temp = true;
+        this.setState({nullSent: temp});
+        if (this.props.playerNumber === "1" || this.props.playerNumber ==="2") {
+          this.props.socket.emit('selection', {
+            socketId: this.props.socketId,
+            playerNumber: this.props.playerNumber, 
+            selection: this.props.selection, 
+          }); 
+        }
       }
     }
 
@@ -52,7 +64,8 @@ class Clock extends React.Component {
       this.setState({
         time: 15,
         newGameSent: false,
-        timeDelay: false
+        timeDelay: false,
+        nullSent: false
       })
     }
 
