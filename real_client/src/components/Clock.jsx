@@ -79,22 +79,23 @@ class Clock extends React.Component {
       return (
         <div className = {style.container}>
           <div className = {style.clock}> 
-            {(this.props.winner)? "" : <h2>{this.state.time}</h2>}
+            {(this.props.winner || (this.props.playerNumber !== "1" && this.props.playerNumber !== "2"))? "" : <h2>{this.state.time}</h2>}
+            {(this.props.playerNumber !== "1" && this.props.playerNumber !== "2")?"Waiting for an open game...":""}
             {this.props.winner && !this.state.newGameSent && this.state.timeDelay? this.newGame() : ''}
           </div>
 
           <div className = {style.text}> 
                 {this.props.winner 
                   ?this.props.winner.isTie 
-                    ? ((this.props.winner.winnerChoice + ' ties ' + this.props.winner.loserChoice + '!') , this.timeDelay())
-                    : ((this.props.winner.winnerChoice + ' beats ' + this.props.winner.loserChoice + '!') , this.timeDelay())
+                    ? (this.timeDelay(), (this.props.winner.winnerChoice + ' ties ' + this.props.winner.loserChoice + '!'))
+                    : (this.timeDelay(), (this.props.winner.winnerChoice + ' beats ' + this.props.winner.loserChoice + '!'))
                   : ""
                 }
 
                 <br/>
                 {this.props.winner 
                   ?this.props.winner.isTie 
-                    ?("Its a tie! New Game?")
+                    ?("Its a tie!")
                     :('Player ' + this.props.winner.winner + ' wins!')
                   : ""
                 }
