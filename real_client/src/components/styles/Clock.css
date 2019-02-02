@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    color: red;
+    font-size: 60px;
+    text-shadow: 4px 4px 4px orange, 10px 10px 10px red;
+    /* text-shadow: 2px 2px 10px red; */
+    flex-direction: row;
+    align-self: center;
+    height: 30%;
+    width: 100%;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    font-family: "Avenir Next";
+    color: red;
+    font-size: 60px;
+    text-shadow: 4px 4px 4px orange, 5px 5px 5px red;
+    height: 70%;
+}
+
+.button { 
+    width: 30%; 
+    background: rgb(54, 110, 230); 
+    border: none; 
+    justify-content: space-between;
+    padding: 10px; 
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Avenir Next";
+    font-size: 16px;
+    text-shadow: 4px 4px 4px orange, 10px 10px 10px red;
+}
+
