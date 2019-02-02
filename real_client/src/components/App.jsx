@@ -149,6 +149,9 @@ class App extends React.Component {
                     <button className ={style.button} onClick={this.scissors}>scissors</button>
                     <button className ={style.button} onClick={this.lizard}>lizard</button>
                     <button className ={style.button} onClick={this.spock}>spock</button>
+                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.rock} >rock</button> : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "1" ? <button className ={style.button} onClick={this.paper} >paper</button> : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "1"? <button className ={style.button} onClick={this.scissors} >scissors</button> : <button className ={style.buttonDisabled} disabled>scissors</button>}
                   </div>
                 </div>
               </div>

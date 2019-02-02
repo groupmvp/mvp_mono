@@ -98,7 +98,7 @@ io.sockets.on('connection', function (socket) {
     if (result) {
       io.emit('winner', result);
 
-      if (!result.winner && !result.loser && !isTie) {
+      if (!result.winner && !result.loser && !result.isTie) {
         
         let loser1 = players[1];
         let loser2 = players[2];
