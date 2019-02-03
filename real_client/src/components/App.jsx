@@ -21,7 +21,10 @@ class App extends React.Component {
         timer: 30,
         winner: null,
         queue: ['jeremy', 'beremy', 'kevin'],
-        temp: true
+        temp: true,
+        taunt: null,
+        firstTime: true,
+        username: ""
       };
       this.rock = this.rock.bind(this);
       this.paper = this.paper.bind(this);
@@ -120,6 +123,12 @@ class App extends React.Component {
       })
     }
 
+    saveName() {
+      let name = prompt("Please Enter A User Name:", "Sheldon Cooper")
+      this.setState({firstTime: false})
+      this.setState({username: name })
+    }
+
     gameReset() {
       let temp = null;
       let bool = false;
@@ -136,17 +145,14 @@ class App extends React.Component {
 
     }
 
-    // changeColor() {
-    //   this.setState({temp: !this.state.temp});
-    // }
-
     render() {
         return(
           <div>
             <div className={style.container}>
               <div className={style.playerOne}>
                 {/* {(!this.state.alert && this.state.playerNumber === "1") ? alert('Welcome Player One!') : ''} */}
-                <div className={style.playerOneText}>PLAYER ONE<br/>
+                {this.state.firstTime ? (this.saveName()): ""}
+                <div className={style.playerOneText}>{this.state.playerNumber === "1" ? this.state.username: "Your Opponent"}<br/>
                   <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
                   <div className = {style.buttonBox}>
                     {this.state.playerNumber === "1" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rock}>rock</button> : <button className ={style.buttonClicked} onClick={this.rock}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
@@ -170,7 +176,7 @@ class App extends React.Component {
               </div>
               <div className={style.playerTwo}>
                 {/* {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''}  */}
-                <div className={style.playerTwoText}>PLAYER TWO<br/>
+                <div className={style.playerTwoText}>{this.state.playerNumber === "2" ? this.state.username: "Your Opponent"}<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_RPSLS.gif"></img>
                   <div className = {style.buttonBox}>
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rock}>rock</button> : <button className ={style.buttonClicked} onClick={this.rock}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
@@ -178,7 +184,6 @@ class App extends React.Component {
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissors}>scissors</button> : <button className ={style.buttonClickedScissors} onClick={this.scissors}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'lizard' )? <button className ={style.button} onClick={this.lizard}>lizard</button> : <button className ={style.buttonClicked} onClick={this.liazrd}>lizard</button> ) : <button className ={style.buttonDisabled} disabled>lizard</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'spock' )? <button className ={style.button} onClick={this.spock}>spock</button> : <button className ={style.buttonClicked} onClick={this.spock}>spock</button> ) : <button className ={style.buttonDisabled} disabled>spock</button>}
-
                   </div>
                 </div>
               </div>
