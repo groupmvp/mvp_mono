@@ -31,6 +31,13 @@ class App extends React.Component {
       this.scissors = this.scissors.bind(this);
       this.lizard = this.lizard.bind(this);
       this.spock = this.spock.bind(this);
+
+      this.rockTaunt = this.rockTaunt.bind(this);
+      this.paperTaunt = this.paperTaunt.bind(this);
+      this.scissorsTaunt = this.scissorsTaunt.bind(this);
+      this.lizardTaunt = this.lizardTaunt.bind(this);
+      this.spockTaunt = this.spockTaunt.bind(this);
+
       this.winner = this.winner.bind(this);
       this.bothPlayersReady = this.bothPlayersReady.bind(this)
       this.gameReset = this.gameReset.bind(this);
@@ -145,6 +152,35 @@ class App extends React.Component {
 
     }
 
+    rockTaunt() {
+      console.log("rock Taunt")
+      this.setState({taunt: "rock"})
+    }
+
+    paperTaunt() {
+      console.log("paper Taunt")
+      this.setState({taunt: "paper"})
+
+    }
+
+    scissorsTaunt() {
+      console.log("scissors Taunt")
+      this.setState({taunt: "scissors"})
+
+
+    }
+
+    lizardTaunt() {
+      console.log("lizard Taunt")
+      this.setState({taunt: "lizard"})
+    }
+
+    spockTaunt() {
+      console.log("spock Taunt")
+      this.setState({taunt: "spock"})
+
+    }
+
     render() {
         return(
           <div>
@@ -154,14 +190,32 @@ class App extends React.Component {
                 {this.state.firstTime ? (this.saveName()): ""}
                 <div className={style.playerOneText}>{this.state.playerNumber === "1" ? this.state.username: "Your Opponent"}<br/>
                   <div className={style.playerOneImg}><img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_bag.gif"></img></div>
+                  {<br></br>}
+                  {<b> Choice </b>}
+                  {<br></br>}
                   <div className = {style.buttonBox}>
                     {this.state.playerNumber === "1" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rock}>rock</button> : <button className ={style.buttonClicked} onClick={this.rock}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "1" ? ((this.state.selection !== 'paper' )? <button className ={style.button} onClick={this.paper}>paper</button> : <button className ={style.buttonClicked} onClick={this.paper}>paper</button> ) : <button className ={style.buttonDisabled} disabled>paper</button>}
-                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissors}>scissors</button> : <button className ={style.buttonClickedScissors} onClick={this.scissors}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissors}>scissors</button> : <button className ={style.buttonScissors} onClick={this.scissors}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
                     {this.state.playerNumber === "1" ? ((this.state.selection !== 'lizard' )? <button className ={style.button} onClick={this.lizard}>lizard</button> : <button className ={style.buttonClicked} onClick={this.liazrd}>lizard</button> ) : <button className ={style.buttonDisabled} disabled>lizard</button>}
                     {this.state.playerNumber === "1" ? ((this.state.selection !== 'spock' )? <button className ={style.button} onClick={this.spock}>spock</button> : <button className ={style.buttonClicked} onClick={this.spock}>spock</button> ) : <button className ={style.buttonDisabled} disabled>spock</button>}
                   </div>
+                  {<br></br>}
+                  {<b> Taunt Your Opponent</b>}
+                  {<br></br>}
+                  <div className = {style.buttonBox}>
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rockTaunt}>rock</button> : <button className ={style.button} onClick={this.rockTaunt}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'paper' )? <button className ={style.button} onClick={this.paperTaunt}>paper</button> : <button className ={style.button} onClick={this.paperTaunt}>paper</button> ) : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissorsTaunt}>scissors</button> : <button className ={style.buttonScissors} onClick={this.scissorsTaunt}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'lizard' )? <button className ={style.button} onClick={this.lizardTaunt}>lizard</button> : <button className ={style.button} onClick={this.lizardTaunt}>lizard</button> ) : <button className ={style.buttonDisabled} disabled>lizard</button>}
+                    {this.state.playerNumber === "1" ? ((this.state.selection !== 'spock' )? <button className ={style.button} onClick={this.spockTaunt}>spock</button> : <button className ={style.button} onClick={this.spockTaunt}>spock</button> ) : <button className ={style.buttonDisabled} disabled>spock</button>}
+                  </div>
                 </div>
+              </div>
+              <div className = {style.playerOneTaunt}>
+                {<b>Taunt</b>}
+                {<br></br>}
+                {(this.state.playerNumber === "1"&& this.state.taunt) ? this.state.taunt : "" }
               </div>
               <div className={style.spaceContainer}>
                 <Clock 
@@ -174,16 +228,37 @@ class App extends React.Component {
                 playerNumber = {this.state.playerNumber}
                 />
               </div>
+              <div className = {style.playerTwoTaunt}>
+                {<b>Taunt</b>}
+                {<br></br>}
+                {(this.state.playerNumber === "2" && this.state.taunt) ? this.state.taunt : "" }
+              </div>
               <div className={style.playerTwo}>
                 {/* {(!this.state.alert && this.state.playerNumber === "2") ? alert('Welcome Player Two!')  : ''}  */}
                 <div className={style.playerTwoText}>{this.state.playerNumber === "2" ? this.state.username: "Your Opponent"}<br/>
                   <img src = "https://s3-us-west-1.amazonaws.com/table-it/sheldon_RPSLS.gif"></img>
+                  {<br></br>}
+                  {<b> Choice </b>}
+                  {<br></br>}
                   <div className = {style.buttonBox}>
+                    {/* {<div>Your Choice</div>}
+                    {<br></br>} */}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rock}>rock</button> : <button className ={style.buttonClicked} onClick={this.rock}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'paper' )? <button className ={style.button} onClick={this.paper}>paper</button> : <button className ={style.buttonClicked} onClick={this.paper}>paper</button> ) : <button className ={style.buttonDisabled} disabled>paper</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissors}>scissors</button> : <button className ={style.buttonClickedScissors} onClick={this.scissors}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'lizard' )? <button className ={style.button} onClick={this.lizard}>lizard</button> : <button className ={style.buttonClicked} onClick={this.liazrd}>lizard</button> ) : <button className ={style.buttonDisabled} disabled>lizard</button>}
                     {this.state.playerNumber === "2" ? ((this.state.selection !== 'spock' )? <button className ={style.button} onClick={this.spock}>spock</button> : <button className ={style.buttonClicked} onClick={this.spock}>spock</button> ) : <button className ={style.buttonDisabled} disabled>spock</button>}
+                  </div>
+                  {<br></br>}
+                  {<b> Taunt Your Opponent</b>}
+                  {<br></br>}
+                  <div className = {style.buttonBox}>
+                    {<br></br>}
+                    {this.state.playerNumber === "2" ? ((this.state.selection !== 'rock' )? <button className ={style.button} onClick={this.rockTaunt}>rock</button> : <button className ={style.button} onClick={this.rockTaunt}>rock</button> ) : <button className ={style.buttonDisabled} disabled>rock</button>}
+                    {this.state.playerNumber === "2" ? ((this.state.selection !== 'paper' )? <button className ={style.button} onClick={this.paperTaunt}>paper</button> : <button className ={style.button} onClick={this.paperTaunt}>paper</button> ) : <button className ={style.buttonDisabled} disabled>paper</button>}
+                    {this.state.playerNumber === "2" ? ((this.state.selection !== 'scissors' )? <button className ={style.buttonScissors} onClick={this.scissorsTaunt}>scissors</button> : <button className ={style.buttonScissors} onClick={this.scissorsTaunt}>scissors</button> ) : <button className ={style.buttonDisabledScissors} disabled>scissors</button>}
+                    {this.state.playerNumber === "2" ? ((this.state.selection !== 'lizard' )? <button className ={style.button} onClick={this.lizardTaunt}>lizard</button> : <button className ={style.button} onClick={this.lizardTaunt}>lizard</button> ) : <button className ={style.buttonDisabled} disabled>lizard</button>}
+                    {this.state.playerNumber === "2" ? ((this.state.selection !== 'spock' )? <button className ={style.button} onClick={this.spockTaunt}>spock</button> : <button className ={style.button} onClick={this.spockTaunt}>spock</button> ) : <button className ={style.buttonDisabled} disabled>spock</button>}
                   </div>
                 </div>
               </div>

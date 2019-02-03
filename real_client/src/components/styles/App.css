@@ -34,14 +34,14 @@ body {
     justify-content: flex-start;
     font-family: "Avenir Next";
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     align-content: flex-start;
 }
 .playerTwo {
     display: flex;
     font-family: "Avenir Next";
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     align-content: flex-start;
 }
 .playerOneText {
@@ -72,7 +72,19 @@ body {
     position: relative
 }
 
+.playerOneTaunt {
+    display:flex;
+    color: red;
+    font-size: 24px;
+    width: 10%;
+}
 
+.playerTwoTaunt {
+    display: flex;
+    color: blue;
+    font-size: 24px;
+    width: 10%;
+}
 
 /* BUTTONS */
 .buttonScissors { 
@@ -245,5 +257,5 @@ body {
     justify-content: center;
     font-family: "Avenir Next";
     flex-direction: column;
-    width: 50%
+    width: 40%
 }
